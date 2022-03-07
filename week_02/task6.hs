@@ -14,6 +14,4 @@ sumDigits 0 = 0
 sumDigits n = mod n 10 + sumDigits (div n 10)
 
 isInteresting :: Int -> Bool
-isInteresting n
-  | mod n (sumDigits n) == 0 = True
-  | otherwise = False
+isInteresting n = mod n (sumDigits n) == 0
