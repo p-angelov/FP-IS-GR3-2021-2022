@@ -5,10 +5,7 @@ main = do
 countOccurences :: Int -> Int -> Int
 countOccurences n num
   | n < 0 = error "n is negative"
-  | n >= 0 && n <= 9 && n == num = 1
-  | otherwise = helper n num 0
-  where
-      helper :: Int -> Int -> Int -> Int
-      helper n num count
-        | n == num = count + 1
-        | otherwise = helper (div n 10) num count
+  | n < 10 && n == num = 1
+  | mod n 10 == num = 1 + countOccurences (div n 10) num
+  | mod n 10 /= num = countOccurences (div n 10) num
+  | otherwise = countOccurences (div n 10) num
