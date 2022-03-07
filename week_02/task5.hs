@@ -19,7 +19,4 @@ sumDivs n
        | otherwise = helper (currentDiv + 1) result
 
 areAmicable :: Int -> Int -> Bool
-areAmicable m n
-  | m == n = True
-  | sumDivs m == sumDivs n = True
-  | otherwise = False
+areAmicable m n = sumDivs m == sumDivs n
