@@ -5,3 +5,7 @@ main = do
 
 findSum :: Int -> Int -> Int -> Int
 findSum a b n
+  | n <= 3 = error "n must be bigger than 3"
+  | otherwise = helper a b n 0
+  where
+      

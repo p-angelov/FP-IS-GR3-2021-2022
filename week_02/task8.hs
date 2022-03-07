@@ -9,4 +9,9 @@ main = do
 
 removeD :: Int -> Int -> Int
 removeD dig n
-  | n < 0 
+  | n < 0 = error "n must be positive"
+  | n < 10 && n == dig = 0
+  | n < 10 && n /= dig = dig
+  | mod n 10 == dig = n - removeD dig (mod n 10)
+  | mod n 10 /= dig = (removeD dig (div n 10)) * 10 + mod n 10
+  | otherwise = removeD dig (div n 10)

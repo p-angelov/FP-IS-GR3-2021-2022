@@ -22,10 +22,10 @@ isPalindrome x = rev x == x
 
 countPalindromes :: Int -> Int -> Int
 countPalindromes a b
-  | a == b = 0
+  | a > b = countPalindromes b a
   | otherwise = helper a b 0
   where
       helper :: Int -> Int -> Int -> Int
       helper a b count
-        | a <= b && isPalindrome (a - 1) = count + 1 
-        | otherwise = helper (a - 1) b count
+       | a <= b && isPalindrome (a + 1) = count + 1 
+       | otherwise = helper (a + 1) b count
