@@ -11,7 +11,7 @@ isPrime n = n > 1 && helper 2
  where
      helper :: Int -> Bool
      helper i
-      | (fromIntegral i) >= (sqrt $ fromIntegral n) = True
+      | (fromIntegral i) > (sqrt $ fromIntegral n) = True
       | mod n i == 0 = False
       | otherwise = helper (i + 1)
 
