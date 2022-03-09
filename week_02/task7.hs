@@ -14,7 +14,8 @@ main = do
     print $ maxMultiple 7 100 == 98  
     print $ maxMultiple 7 10 == 7
     print $ maxMultiple 4 4 == 4
-
+    
+{-
 divides :: Int -> Int -> Bool
 divides a b = mod a b == 0
 
@@ -30,3 +31,10 @@ maxMultiple d b
       helper d b myMax
         | isMaxMultiple myMax d b = myMax
         | otherwise = helper d b (myMax + 1)
+-}
+
+maxMultiple :: Int -> Int -> Int
+maxMultiple d 0 = error "division by 0"
+maxMultiple d b
+ | mod b d == 0 = b
+ | otherwise = maxMultiple d (b - 1)
