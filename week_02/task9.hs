@@ -11,8 +11,6 @@ main = do
     print $ everyOther 448575 == 784
     print $ everyOther 4214 == 14
 
-
-
 everyOther :: Int -> Int
 everyOther n
   | n < 100 = div n 10
@@ -20,5 +18,7 @@ everyOther n
   where
       helper :: Int -> Int -> Int -> Int
       helper n i res
-      | n < 100 = (div n 10) + res
-      | otherwise = helper (div n 100) (i + 1) (res + mod(div n 10) * 10^i)
+        | n < 100 = res
+        | i == 1 = helper (div n 10) (i - 1) (res + (mod n 10)*10)
+        | otherwise = helper (div n 10) i res
+       
