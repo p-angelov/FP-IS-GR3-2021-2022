@@ -14,6 +14,7 @@ rev n = helper n 0
      helper 0 result = result
      helper n result = helper (div n 10) (result * 10 + mod n 10)
 
+{-
 removeD :: Int -> Int -> Int
 removeD dig n
   | n < 0 = error "n must be positive"
@@ -26,3 +27,15 @@ removeD dig n
         | n < 10 = rev res + n * 10^i
         | mod n 10 /= dig = helper dig (div n 10) (i + 1) (res + ((mod n 10) * 10^i))
         | otherwise = helper dig (div n 10) i res
+-}
+
+removeD :: Int -> Int -> Int
+removeD dig n
+  | n < 0 = error "n must be positive"
+  | otherwise = helper n 0
+  where
+      helper :: Int -> Int -> Int
+      helper 0 res = rev res
+      helper leftover res
+       | mod leftover 10 == dig = helper (div leftover 10) res
+       | otherwise = helper (div leftover 10) (res * 10 + mod leftover 10)
