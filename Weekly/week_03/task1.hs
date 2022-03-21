@@ -8,18 +8,6 @@ main = do
     print $ removeFistOccurrence 1212 1 == 122
     print $ removeFistOccurrence 1212 2 == 121
     print $ removeFistOccurrence (removeFistOccurrence 1212 1) 1 == 22
-{-
-removeD :: Int -> Int -> Int
-removeD dig n
-  | n < 0 = error "n must be positive"
-  | otherwise = helper n 0
-  where
-      helper :: Int -> Int -> Int
-      helper 0 res = rev res
-      helper leftover res
-       | mod leftover 10 == dig = helper (div leftover 10) res
-       | otherwise = helper (div leftover 10) (res * 10 + mod leftover 10)
--}
 
 rev :: Int -> Int
 rev n = helper n 0

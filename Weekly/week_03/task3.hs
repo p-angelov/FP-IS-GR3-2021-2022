@@ -10,4 +10,7 @@ main = do
     print $ calcSeriesSum 1 6 == -1.0762718762718764
 
 calcSeriesSum :: Int -> Int -> Double
-calcSeriesSum 
+calcSeriesSum x n = helper 0 0 (-2) 1 1
+    where
+        helper :: Double -> Double -> Double -> Double -> Double -> Double
+        helper result i 

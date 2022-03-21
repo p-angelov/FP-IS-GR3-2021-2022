@@ -1,7 +1,7 @@
 main :: IO()
 main = do
-    print $ sortN 1714 -- == 7411
-    print $ sortN 123450 -- == 543210
+    print $ sortN 1714 == 7411
+    print $ sortN 123450 == 543210
     print $ sortN 123405 == 543210
     print $ sortN 123045 == 543210
     print $ sortN 120345 == 543210
