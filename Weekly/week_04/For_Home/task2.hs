@@ -20,9 +20,7 @@ isPresentRecNonPM n xs
 
 isPresentRecPM :: Int -> [Int] -> Bool
 isPresentRecPM a [] = False
-isPresentRecPM a xs
-  | a == head xs = True
-  | otherwise = isPresentRecPM a (tail xs)
+isPresentRecPM a (x:xs) = a == x || isPresentRecPM a xs
 
 isPresentFunc :: Int -> [Int] -> Bool
-isPresentFunc xs = elem xs
+isPresentFunc = elem

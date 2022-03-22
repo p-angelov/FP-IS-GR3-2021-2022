@@ -19,4 +19,4 @@ mySumRecPM [] = 0
 mySumRecPM (x:xs) = x + mySumRecPM xs
 
 mySumFunc :: [Int] -> Int
-mySumFunc xs = sum xs
+mySumFunc = sum

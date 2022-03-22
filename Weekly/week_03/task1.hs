@@ -1,13 +1,13 @@
 main :: IO()
 main = do
-    print $ removeFistOccurrence 15365 5 == 1536
-    print $ removeFistOccurrence 15360 0 == 1536
-    print $ removeFistOccurrence 15300 0 == 1530
-    print $ removeFistOccurrence 15365 1 == 5365
-    print $ removeFistOccurrence 35365 3 == 3565
-    print $ removeFistOccurrence 1212 1 == 122
-    print $ removeFistOccurrence 1212 2 == 121
-    print $ removeFistOccurrence (removeFistOccurrence 1212 1) 1 == 22
+    print $ removeFirstOccurrence 15365 5 -- == 1536
+    print $ removeFirstOccurrence 15360 0 == 1536
+    print $ removeFirstOccurrence 15300 0 == 1530
+    print $ removeFirstOccurrence 15365 1 == 5365
+    print $ removeFirstOccurrence 35365 3 == 3565
+    print $ removeFirstOccurrence 1212 1 == 122
+    print $ removeFirstOccurrence 1212 2 == 121
+    print $ removeFirstOccurrence (removeFirstOccurrence 1212 1) 1 == 22
 
 rev :: Int -> Int
 rev n = helper n 0
@@ -21,7 +21,8 @@ removeFirstOccurrence n dig
   | n < 0 = error "n must be positive"
   | otherwise = helper n 0
   where
-      helper :: Int -> Int -> Int
+      helper :: Int -> Int -> Int -- flagg wit bool
       helper 0 res = res
-        | mod n 10 == dig = res + (n - dig * 10)
-        | otherwise helper (div n 10) (res * 10 + mod n 10)
+      helper n res
+        | mod n 10 == dig = res
+        | otherwise = helper (div n 10) (res * 10 + mod n 10)

@@ -9,5 +9,5 @@ main = do
     print $ isAscending 12332 == False
 
 isAscending :: Int -> Bool
-isAscending n = (sort $ map digitToInt $ show n) == (map digitToInt $ show n)
+isAscending n = (sort $ show n) == show n
 

@@ -9,8 +9,10 @@ main = do
     print $ calcSeriesSum 1 5 == -1.0753246753246755
     print $ calcSeriesSum 1 6 == -1.0762718762718764
 
-calcSeriesSum :: Int -> Int -> Double
-calcSeriesSum x n = helper 0 0 (-2) 1 1
+calcSeriesSum :: Double -> Double -> Double
+calcSeriesSum x n = helper (-2) 1 3 0 0
     where
         helper :: Double -> Double -> Double -> Double -> Double -> Double
-        helper result i 
+        helper nom dnom denomMult result i
+         | i > n = result
+         | otherwise = helper (nom * (-2) * x) (dnom * denomMult) (denomMult + 2) (result + nom / dnom) (i + 1)
