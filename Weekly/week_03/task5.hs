@@ -7,7 +7,6 @@ main = do
     print $ p 5 == 35
     print $ p 6 == 51
 
-
--- helper linear itterative
-p :: Int -> Int
-p n = div (3 * n * n - n) 2
+p :: Int -> Int 
+p 1 = 1
+p n = 1 + 3 * (n - 1) + p (n - 1)
