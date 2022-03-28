@@ -1,5 +1,11 @@
+import Data.Char
+import Data.List
+
 main :: IO()
 main = do
+    print $ maxRotation 56789 == 68957
+    print $ maxRotation 12490 == 29140
+
     print $ sumCountsIter 1 1 == 1
     print $ sumCountsIter 5123 1 == 19
     print $ sumCountsIter 1234 8 == 10
@@ -36,3 +42,25 @@ sumCountsIter x d
       helper currNum res          -- добавяме срещанията на d към res и когато стигнем чилсо след  
         | currNum > x = res       -- x връщаме резултата в основната функция и ползваме sumDigits за да намерим крайния резултат
         | otherwise = helper (currNum + 1) (countOccurences currNum d) + res
+
+digitCount :: Int -> Int -- функция за пресмятане броя цифри в дадено число
+digitCount n = helper n 0
+  where
+      helper :: Int -> Int -> Int
+      helper n count
+        | n <= 0 = count
+        | otherwise = helper (div n 10) (count + 1)
+
+rotate :: [a] -> [a] -- помощна функция преместваща най-лявото число като първо вдясно
+rotate [] = []
+rotate (a:as) = as ++ [a]
+
+maxRotation :: Int -> Int -- главна функция
+maxRotation n = maximum $ helper n 0
+  where
+      helper :: Int -> Int -> [Int] -- помощна функция ползваща rotate и съответно запазваща цифрите вляво
+      helper curr keeper
+        | keeper >= digitCount n - 1 = []
+        | otherwise = res : helper res (keeper + 1)
+          where
+              res = read $ take keeper (show curr) ++ (rotate $ drop keeper (show curr))
