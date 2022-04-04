@@ -1,5 +1,5 @@
-import Data.Char ()
-import Data.List ()
+import Data.Char
+import Data.List
 
 main :: IO()
 main = do
@@ -11,17 +11,12 @@ main = do
     print $ getPalindromes 26362 == 26364
 
 isPali :: Int -> Bool
-isPali 0 = True
-isPali x
-  | x < 10 = True
-  | head (show x) /= head $ reverse $ show x = False
-  | otherwise = isPali (read $ tail $ init (show x))
+isPali n = n == revInt n
+  where
+      revInt :: Int -> Int
+      revInt = read . reverse . show
 
 getPalindromes :: Int -> Int
-getPalindromes n = helper n 0
+getPalindromes n = (minimum xs) + (maximum xs)
   where
-      helper :: Int -> Int -> Int
-      helper currDiv res
-        | currDiv == 0 = res
-        | isPali currDiv && mod n currDiv == 0 = helper (currDiv + 1) (res + currDiv)
-        | otherwise = helper (currDiv + 1) res
+      xs = [x | x <- [2 .. n], isPali x && mod n x == 0]
