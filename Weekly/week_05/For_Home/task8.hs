@@ -24,6 +24,6 @@ dotProduct (x1, x2, x3) (y1, y2, y3) = (x1 * y1 + x2 * y2 + x3 * y3)
 crossProduct :: (Num a) => Vector a -> Vector a -> Vector a
 crossProduct (x1, x2, x3) (y1, y2, y3) = (x2 * y3 - x3 * y2, (-1) * (x1 * y3 - x3 * y1), x1 * y2 - x2 * y1)
 
-magnitude :: (Num a) => Vector a -> Double
-magnitude (x1, x2, x3) = sqrt $ fromIntegral (x1^2 + x2^2 + x3^2)
+magnitude :: (Num a, Floating a) => Vector a -> a
+magnitude (x1, x2, x3) = sqrt (x1**2 + x2**2 + x3**2)
 

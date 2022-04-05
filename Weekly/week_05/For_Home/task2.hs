@@ -10,5 +10,4 @@ main = do
     print $ isArithmentic [3, 5, 8, 9, 11] == False
 
 isArithmentic :: [Int] -> Bool
-isArithmentic [xs] = length [xs] == 1
-isArithmentic xs = [x | x <- [xs!!3 .. length xs], ]
+isArithmentic xs = length xs < 2 || xs == take (length xs) [xs!!0, xs!!1 ..]
