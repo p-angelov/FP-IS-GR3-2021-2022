@@ -1,1 +1,0 @@
-countOfDiv a
