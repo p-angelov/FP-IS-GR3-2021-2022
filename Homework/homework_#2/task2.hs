@@ -7,28 +7,19 @@ main = do
     print $ actorsNetworthHigherThan 125000000 db == [([["Billy Bob Thornton","Scarlett Johansson"],["Kim Basinger","Alec Baldwin","Harrison Ford"],["Harrison Ford"]],["The Man Who Wasn't There","Star Wars","Empire Strikes Back"],"George Lucas",200000000)]
 
 actorsNetworthHigherThan :: Integer -> MovieDB -> [([[Name]], [Title], Name, Integer)]
-actorsNetworthHigherThan k (ms, ss, ssI, std, mE) = map (\(name, id, nw) -> (actorsFromME id, takeMovieFromID id, name, nw ) ) allMovieExecsHigherThanK
+actorsNetworthHigherThan k (ms, ss, ssI, std, mE) = map (\(name, id, nw) -> (actorsFromME id, takeMovieFromID id, name, nw ) ) allMovieExecsHigherThanK -- основна функция
  where
-     allMovieExecsHigherThanK :: [MovieExec]
-     allMovieExecsHigherThanK = filter (\(_, _, z) -> z > k) mE
-
-    --  takeName :: [Name]
-    --  takeName = map (\(x, _, _) -> x) allMovieExecsHigherThanK
-
-    --  takeID :: [ProducerID]
-    --  takeID = map (\(_, y, _) -> y) allMovieExecsHigherThanK
-
-    --  takeNW :: [Networth]
-    --  takeNW = map (\(_, _, z) -> z) allMovieExecsHigherThanK
-
      takeMovieFromID :: ProducerID -> [Title]
-     takeMovieFromID id = map (\(title, _, _, _, _) -> title) $ filter (\(_, _, _, _, id') -> id' == id) ms
+     takeMovieFromID id = map (\(title, _, _, _, _) -> title) $ filter (\(_, _, _, _, id') -> id' == id) ms -- функция, която връща филми по подадено id на продуцент
 
      actorsInMovie :: Title -> [Name]
-     actorsInMovie title = map (\(actor, _) -> actor) $ filter (\(_, movieT) -> movieT == title) ssI
+     actorsInMovie title = map (\(actor, _) -> actor) $ filter (\(_, filmT) -> filmT == title) ssI -- функция извеждаща актьорите в даден филм
 
      actorsFromME :: ProducerID -> [[Name]]
-     actorsFromME id' = map (\title -> actorsInMovie title) $ takeMovieFromID id'
+     actorsFromME id = map (\title -> actorsInMovie title) $ takeMovieFromID id -- функция, която връща актьорите по подадено id на продуцент
+
+     allMovieExecsHigherThanK :: [MovieExec]
+     allMovieExecsHigherThanK = filter (\(_, _, nw) -> nw > k) mE -- функция филтрираща продуцентите със сътояние по-голямо от k
 
 type Name = String
 type Title = String

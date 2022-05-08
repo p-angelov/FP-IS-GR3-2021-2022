@@ -9,18 +9,11 @@ main = do
     print $ sunkK 9 database == [("Germany",0),("USA",4),("Japan",2),("Gt.Britain",0)]
     print $ sunkK 20 database == [("Germany",0),("USA",4),("Japan",2),("Gt.Britain",0)]
 
-counter :: Ord a => a -> [a] -> Int
-counter _ [] = 0
-counter x xs = (length . filter (== x)) xs -- length $ filter (\y-> y == x) xs
-
 sunkK :: Int -> Database -> [(Name, Int)]
-sunkK k (os, bs, ss, cs) = filter (\x -> snd x <= k) $ map (\country -> (country, counter country countries)) allCountries
+sunkK k (os, bs, ss, cs) = filter (\x -> snd x <= k) $ map (\c -> (c, counter c countries)) allCountries --основна функция
  where
-     sunkenShips :: [Name]
-     sunkenShips = map (\(name, _, _) -> name) $ filter (\(_, _, res) -> res == "sunk") os
-
      intoClasses :: [Class]
-     intoClasses = [ y | (x, y, _) <- ss, elem x sunkenShips ]
+     intoClasses = [ class' | (name, class', _) <- ss, elem name sunkenShips ]
 
      intoCountries :: Class -> Name
      intoCountries c = head [ country | (shipClass, _, country) <- cs, shipClass == c ]
@@ -28,9 +21,15 @@ sunkK k (os, bs, ss, cs) = filter (\x -> snd x <= k) $ map (\country -> (country
      countries :: [Name]
      countries = map (\x -> intoCountries x) intoClasses
 
-     allCountries :: [Name]
-     allCountries = nub $ map (\(_, _, z) -> z) cs
+     sunkenShips :: [Name]
+     sunkenShips = map (\(name, _, _) -> name) $ filter (\(_, _, res) -> res == "sunk") os -- всички потънали кораби в базата данни
 
+     allCountries :: [Name]
+     allCountries = nub $ map (\(_, _, countryName) -> countryName) cs -- списък с всички държави в базата данни
+
+     counter :: Ord a => a -> [a] -> Int -- универсална помощна функция, използвана в основната, преброяваща колко елемента на xs удовлетворяват
+     counter _ [] = 0                    -- (\y-> y == x)
+     counter x xs = length $ filter (\y-> y == x) xs
 
 type Name = String
 type Date = String
