@@ -25,14 +25,14 @@ accounts1 = [(1, 1, 12.5),(2, 1, 123.2),(3, 2, 13.0),(4, 2, 50.2),(5, 2, 17.2),(
 -- A)
 rounder :: Double -> Double
 rounder num = (fromIntegral . round $ num * f) / f
-    where f = 100
+  where f = 100
 
 getAverageBalance :: ([Account], [Person]) -> (Person -> Bool) -> Double
 getAverageBalance (accounts1, people1) p = rounder (sum balance / (fromIntegral $ length balance))
- where
-     balance = concat [ get id | person@(id, _, _) <- people1, p person]
-     get id = [ b | (_, idP, b) <- accounts1, idP == id ]
+  where
+      balance = concat [ get id | person@(id, _, _) <- people1, p person]
+      get id = [ b | (_, idP, b) <- accounts1, idP == id ]
 
 -- B)
 averageBalanceOfCities :: ([Account], [Person]) -> [String] -> Double
-averageBalanceOfCities (accounts1, people1) cities = 
+averageBalanceOfCities (accounts1, people1) cities = getAverageBalance (accounts1, people1) (\(_,_,city) -> elem city cities)

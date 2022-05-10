@@ -22,6 +22,7 @@ main = do
 type Rat = (Int, Int)
 
 normalize :: Rat -> Rat
+normalize (x, 0) = error "can't divide 0"
 normalize (x, y) = let d = gcd x y in (div x d, div y d)
 
 sumRats :: Rat -> Rat -> Rat
