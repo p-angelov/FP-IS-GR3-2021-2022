@@ -16,4 +16,8 @@ main = do
     print $ duplicateCount (['a'..'z'] ++ ['A'..'Z']) == 26
 
 duplicateCount :: [Char] -> Int
-duplicateCount string = 
+duplicateCount (x1:x2:xs) = helper string 0
+ where
+     helper :: [Char] -> Int -> Int
+     helper (x1:x2:xs) res
+      |

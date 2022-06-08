@@ -1,0 +1,1 @@
+res : reduceStr (filter (\y -> (toLower x == y) || (toLower y == x)) xs)
