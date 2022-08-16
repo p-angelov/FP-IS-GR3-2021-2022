@@ -12,7 +12,7 @@ main = do
 myLengthRecNonPM :: [Int] -> Int
 myLengthRecNonPM xs
   | null xs = 0
-  | oterwise = 1 + (myLengthRecNonPM $ tail xs)
+  | otherwise = 1 + (myLengthRecNonPM $ tail xs)
 
 myLengthRecPM :: [Int] -> Int
 myLengthRecPM [] = 0
